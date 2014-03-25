@@ -2,7 +2,7 @@
    'use strict';
 
    angular.module('datavizApp.controllers', [])
-      .controller('TreemapCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+      .controller('TreemapCtrl', ['$scope', '$http', '$timeout', '$modal', 'sharedSubsector', function($scope, $http, $timeout, $modal, sharedSubsector) {
          
          $scope.currentIndex = -1;
          $scope.dataKeys = [];
@@ -33,7 +33,7 @@
             $timeout(cycle, $scope.animationSpeed);
          };
 
-         $scope.next = function() {
+         $scope.next = function next() {
             $scope.currentIndex++;
             if ($scope.currentIndex == $scope.dataKeys.length) {
                $scope.currentIndex = 0;
@@ -42,7 +42,7 @@
             $scope.currentData = $scope.allData[$scope.currentDay];
          };
 
-         $scope.togglePlay = function() {
+         $scope.togglePlay = function togglePlay() {
 
             $scope.runAnimation = !$scope.runAnimation;
             $scope.cycle();
@@ -63,9 +63,14 @@
          // set the data to treemap
          
          $scope.treemapOnClick = function(item) {
-            //   load detail modal dialog
+            //   load detail modal dialog 
+            sharedSubsector.set(item.name);
             $scope.runAnimation = false;
-            console.log('jooo',item);
+            $modal.open({
+               templateUrl: 'dialog-tpl.html',
+               controller: 'DialogCtrl',
+               windowClass: 'dialog'
+            })
          };
 
       }]);

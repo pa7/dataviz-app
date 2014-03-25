@@ -1,0 +1,41 @@
+{
+  "name": "highstock",
+  "author": "highslide-software",
+  "description": "Highcharts JS is a JavaScript charting library based on SVG and VML rendering.",
+  "version": "3.0.1",
+  "main": [
+    "js/highcharts.src.js",
+    "js/highstock.src.js",
+    "js/highcharts-more.src.js"
+  ],
+  "ignore": [
+    "components",
+    "css",
+    "node_modules",
+    "test",
+    ".*",
+    "Gruntfile.js",
+    "exporting-server",
+    "fiddles",
+    "gfx",
+    "lib",
+    "samples",
+    "studies",
+    "tools",
+    "ant",
+    "build.*",
+    "invalidations.txt",
+    "whats-new.htm"
+  ],
+  "homepage": "https://github.com/robdodson/highcharts.com",
+  "_release": "3.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.1",
+    "commit": "a9d147a0d94fc0d71d0916cd2d87bc21cd8dc0ec"
+  },
+  "_source": "git://github.com/robdodson/highcharts.com.git",
+  "_target": "~3.0.1",
+  "_originalSource": "highstock",
+  "_direct": true
+}

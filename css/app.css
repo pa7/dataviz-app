@@ -1,0 +1,15 @@
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-align:center;
+  text-indent: 2px;
+}
+h1, h2 { text-align:center; }
+h2 { margin-top:0 !important;}
+.modal-dialog {
+  width: 90% !important;
+}
+h3 { text-align:center; }
