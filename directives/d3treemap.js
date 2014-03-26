@@ -13,6 +13,11 @@
 
                var div = d3.select(el[0]).append('div')
                                          .style("position", "relative");
+
+               var tooltip = d3.select(el[0]).append('div')
+                                .attr('class', 'tooltip')
+                                .style("opacity", 0);
+
                var treemap = d3.layout.treemap()
                                           .size([940, 600])
                                           .sticky(false)
@@ -36,7 +41,21 @@
                   node.enter().append('div')
                      .attr('class', 'node')
                      .on('click', function(d) {
-                     return scope.onClick({ item: d });
+                        return scope.onClick({ item: d });
+                     })
+                     .on('mouseenter', function(d) {
+                        tooltip.html('<strong>' + d.name +'</strong> <br /> ( ' +d.parent.name +' )')
+                         .transition()        
+                         .duration(200)      
+                         .style("opacity", .9);    
+
+                     })
+                     .on('mousemove', function(d) {
+                        tooltip.style("left", (d3.event.pageX) + "px")     
+                               .style("top", (d3.event.pageY - 28) + "px");   
+                     })
+                     .on('mouseout', function(d) {
+                        tooltip.style("opacity", 0);   
                      });
 
                   // nodes to remove
@@ -44,8 +63,8 @@
 
                   // the updating nodes
                   node
-                     .style("background", function(d) { return d.children ? color(d.name) : null; })
-                     .text(function(d) { return d.children ? null : d.name; })
+                     .style("background", function(d) { return d.children && d.depth != 0 ? color(d.name) : null; })
+                     .text(function(d) { return d.children ? null : (d.name.length > 20 ? d.name.substring(0,20) + '...' : d.name); }) // primitive label cutting
                      .transition().duration(150)
                      .call(position)
 
@@ -55,7 +74,7 @@
                         .style("top", function(d) { return d.y + "px"; })
                         .style("width", function(d) { return Math.max(0, d.dx - 1) + "px"; })
                         .style("height", function(d) { return Math.max(0, d.dy - 1) + "px"; });
-                  }
+                  };
 
                };
 

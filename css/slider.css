@@ -1,62 +1,62 @@
 slider {
-display: block;
-position: relative;
-height: 25px;
-width: 850px;
-margin-top:10px;
-margin-left:10px;
-float:left;
-cursor: pointer;
+   display: block;
+   position: relative;
+   height: 25px;
+   width: 850px;
+   margin-top:10px;
+   margin-left:10px;
+   float:left;
+   cursor: pointer;
 }
 
 slider span.bar {
-height: 50%;
-z-index: 0;
-background: #eee;
-left: 0;
-top: 25%;
-cursor: pointer;
+   height: 50%;
+   z-index: 0;
+   background: #eee;
+   left: 0;
+   top: 25%;
+   cursor: pointer;
 }
 
 slider span.bar.selection, slider span.bar.unselected {
 }
 
 slider span.bar.selection {
-background: #0a0;
-opacity: 0.5;
+   background: #0a0;
+   opacity: 0.5;
 }
 
 slider span.bar.unselected {
-width: auto;
-background: #a00;
-opacity: 0.5;
+   width: auto;
+   background: #a00;
+   opacity: 0.5;
 }
 
 slider span.pointer {
-cursor: pointer;
-width: 10px;
-top: 0;
-bottom: 0;
-background-color: black;
+   cursor: pointer;
+   width: 10px;
+   top: 0;
+   bottom: 0;
+   background-color: black;
 }
 
 slider span.pointer:hover {
 }
-  slider span.pointer.active {
+slider span.pointer.active {
 }
 
 slider span.bubble {
-font-size: 0.7em;
-line-height: 1.4em;
-font-family: sans-serif;
-text-align: center;
-text-shadow: none;
-top: -1.3em;
-cursor: pointer;
+   font-size: 0.7em;
+   line-height: 1.4em;
+   font-family: sans-serif;
+   text-align: center;
+   text-shadow: none;
+   top: -1.3em;
+   cursor: pointer;
 }
 
 slider span.bubble.selection, slider span.bubble.limit {
-top: 25%;
+   top: 25%;
 }
 
 slider span.bubble.selection {
@@ -69,5 +69,5 @@ slider span.bubble.low, slider span.bubble.high {
 }
 
 ::-ms-tooltip {
-display: none;
+   display: none;
 }

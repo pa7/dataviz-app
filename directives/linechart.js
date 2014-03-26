@@ -5,7 +5,6 @@
       .directive('lineChart', [function() {
          return {
             scope: {
-               data: '=',
                config: '='
             },
             restrict: 'E',
@@ -15,7 +14,6 @@
      
                scope.$watch('config', function(newVals, oldVals) {
                   scope.chart = element.highcharts('StockChart', newVals);
-                  
                });
             }
          }

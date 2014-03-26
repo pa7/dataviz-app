@@ -1,11 +1,17 @@
 .node {
-  border: solid 1px white;
-  font: 10px sans-serif;
-  line-height: 12px;
+  outline: solid 1px white;
+  font: 12px sans-serif;
+  line-height: 120%;
   overflow: hidden;
   position: absolute;
   text-align:center;
   text-indent: 2px;
+  cursor:pointer;
+  color:black;
+  text-shadow:1px 1px 0 rgba(255,255,255,.3);
+}
+.container {
+  width: 970px !important; /* override bootstrap responsiveness */
 }
 h1, h2 { text-align:center; }
 h2 { margin-top:0 !important;}
@@ -13,3 +19,18 @@ h2 { margin-top:0 !important;}
   width: 90% !important;
 }
 h3 { text-align:center; }
+.fullwidth { width:85%; }
+
+div.tooltip {   
+  position: absolute;                                
+  max-height:80px;    
+  max-width:220px;            
+  padding: 10px;             
+  font: 12px sans-serif;        
+  background: white;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;  
+  color:black;
+  text-shadow:1px 1px 0 rgba(255,255,255,.3);       
+}

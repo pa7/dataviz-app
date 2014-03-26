@@ -4,19 +4,17 @@
    angular.module('datavizApp.controllers', [])
       .controller('TreemapCtrl', ['$scope', '$http', '$timeout', '$modal', 'sharedSubsector', function($scope, $http, $timeout, $modal, sharedSubsector) {
          
-         $scope.currentIndex = -1;
-         $scope.dataKeys = [];
+         $scope.currentIndex = -1; 
+         $scope.dataKeys = [];   // the dates
          $scope.currentDay = "";
          $scope.runAnimation = false;
-         $scope.animationSpeed = 1000;
+         $scope.frameLength = 500;
 
          $http({
             method: 'GET',
-            url: '/data/processed-data.json'
-         }).then(function(data, status) {
-            // TODO: move / reduce
+            url: 'data/processed-data.min.json'
+         }).then(function(data, status) {   
             $scope.allData = data.data;
-            // datakeys are the dates
             $scope.dataKeys = Object.keys.call(Object, data.data);
             $scope.currentIndex = 0;
             $scope.currentDay = $scope.dataKeys[$scope.currentIndex];
@@ -30,7 +28,7 @@
             }
             $scope.next();
             // loop 
-            $timeout(cycle, $scope.animationSpeed);
+            $timeout(cycle, $scope.frameLength);
          };
 
          $scope.next = function next() {
@@ -60,8 +58,6 @@
             }
          }, true);
 
-         // set the data to treemap
-         
          $scope.treemapOnClick = function(item) {
             //   load detail modal dialog 
             sharedSubsector.set(item.name);

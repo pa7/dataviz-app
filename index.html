@@ -1,37 +1,63 @@
 <!doctype html>
 <html ng-app="datavizApp">
 <head>
-   <title>Dataviz App</title>
+   <title>Visualizing Market Subsector Weights and Price History</title>
    <style>
-     #chartContainer { width:800px; height:500px; background:red;}
-     .fullwidth { width:85%; }
+    .mainContainer { 
+       opacity: 0;
+      -moz-transition: opacity 1s ease;
+      -o-transition: opacity 1s ease;
+      -webkit-transition: opacity 1s ease;
+      transition: opacity 1s ease;
+    }
+    .mainContainer.loaded {
+      opacity:1;
+    }
    </style>
-   <link rel="stylesheet" href="css/slider.css" />
    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+   <link rel="stylesheet" href="css/slider.css" />   
    <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
-   <h1>Price Sector History Visualization</h1>
-   <div class="container" ng-controller="TreemapCtrl">
-       <button class="btn btn-default btn-lg pull-left" ng-click="togglePlay()" style="width:80px;">{{ !runAnimation && 'play' || 'pause' }}</button><slider ng-model="currentIndex" floor="0" ceiling="{{dataKeys.length-1}}" translate="sliderTranslateFn"></slider>
-     
+   <h1>Market Subsector Weights and Price History</h1>
+   <div class="container mainContainer" ng-controller="TreemapCtrl" ng-class="{loaded:true}">
+       <button class="btn btn-default btn-lg pull-left" ng-click="togglePlay()" style="width:80px;">
+         {{ !runAnimation && 'play' || 'pause' }}
+       </button>
+
+      <slider ng-model="currentIndex" floor="0" ceiling="{{dataKeys.length-1}}" translate="sliderTranslateFn"></slider>
       <br style="clear:both" />
-      <!-- TODO: show animation step pause duration control. right now pause is 1000ms --> 
+      <!-- TODO: show animation step pause duration control. right now pause (frameLength) is 500ms --> 
       <div class="hidden">
-        Pause between animation steps<input type="number" class="form-control" ng-model="animationSpeed" style="text-align:right;width:100px;display:inline;margin:10px;" />ms
+        Pause between animation steps<input type="number" class="form-control" ng-model="frameLength" style="text-align:right;width:100px;display:inline;margin:10px;" />ms
       </div>
       <h2>{{ currentDay }}</h2>
       <d3-treemap data="currentData" on-click="treemapOnClick(item)" />
    </div>
+
    <script type="text/ng-template" id="dialog-tpl.html">
         <div class="modal-head">
-          <h3>Price History Line Chart</h3>
+          <h3>Price Change History for "{{ subsector }}"</h3>
         </div>
         <div class="modal-body">
             <line-chart config="chartConfig" data="chartData" ng-controller="StockChartCtrl"></line-chart>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Subsector</th>
+                  <th>Min</th>
+                  <th>Max {{series.length}}</th>
+              </thead>
+              <tbody>
+                <tr ng-repeat="serie in selection">
+                    <td>{{serie.name}}</td>
+                    <td>{{serie.min}}</td>
+                    <td>{{serie.max}}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
     </script>
-
 
    <!-- Lib -->
    <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -46,12 +72,11 @@
    <script src="services/d3.js"></script>
    <script src="services/priceHistoryStore.js"></script>
    <script src="services/sharedSubsector.js"></script>
+   <script src="services/sharedSelection.js"></script>
    <script src="directives/d3treemap.js"></script>
    <script src="directives/linechart.js"></script>
    <script src="controllers/treemapCtrl.js"></script>
    <script src="controllers/dialogCtrl.js"></script>
    <script src="controllers/stockChartCtrl.js"></script>
-   <!-- LiveReload Dev -->
-   <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 </body>
 </html>
