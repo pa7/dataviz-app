@@ -47,7 +47,9 @@
                         tooltip.html('<strong>' + d.name +'</strong> <br /> ( ' +d.parent.name +' )')
                          .transition()        
                          .duration(200)      
-                         .style("opacity", .9);    
+                         .style("opacity", .9)
+                         .style("left", (d3.event.pageX) + "px")     
+                               .style("top", (d3.event.pageY - 28) + "px");    
 
                      })
                      .on('mousemove', function(d) {
